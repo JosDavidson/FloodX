@@ -1,4 +1,13 @@
 /**
+ * index.js — Firebase Cloud Functions for FLEWS Backend Integration
+ * Includes: Telegram Alerts, Twilio SMS Alerts, and Gemini Proxy
+ */
+
+const fetch = require("node-fetch");
+const functions = require("firebase-functions");
+const twilio = require("twilio");
+
+/**
  * Import function triggers from their respective submodules:
  *
  * const {onCall} = require("firebase-functions/v2/https");

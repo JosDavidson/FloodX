@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLEWS - Flood Early Warning System, Assam</title>
+    <title>FloodX - Flood Early Warning System, Assam</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Configure Tailwind for Inter font -->
@@ -40,7 +40,7 @@
                 <div class="flex justify-between items-center h-16">
                     <a href="#home" class="flex items-center space-x-2">
                         <svg class="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 100-16 8 8 0 000 16zM11 15h2v2h-2zm0-8h2v6h-2z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20a8 8 0 01-6.93-3.99A4.996 4.996 0 0112 10a4.996 4.996 0 016.93 6.01A8 8 0 0112 20z"></path></svg>
-                        <span class="text-xl font-bold text-gray-900">FLEWS</span>
+                        <span class="text-xl font-bold text-gray-900">FloodX</span>
                     </a>
                     <div class="flex items-center space-x-6">
                          <!-- Dark Mode Toggle Button -->
@@ -51,7 +51,7 @@
                         
                         <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
                             <a href="#home" class="text-gray-500 hover:text-cyan-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150">Home</a>
-                            <a href="#about" class="text-gray-500 hover:text-cyan-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150">About FLEWS</a>
+                            <a href="#about" class="text-gray-500 hover:text-cyan-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150">About FloodX</a>
                             <a href="#monitoring" class="text-gray-500 hover:text-cyan-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150">Monitoring</a>
                             <a href="#llm-qa" class="text-gray-500 hover:text-cyan-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150">LLM Q&A</a>
                             <a href="#components" class="text-gray-500 hover:text-cyan-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150">Components</a>
@@ -187,24 +187,24 @@
                             Direct Alert Subscription (Simulated)
                         </h3>
                         <p class="text-sm text-gray-600 mb-4">
-                            Receive FLEWS alerts directly to your mobile or Telegram app (simulated feature for demonstration purposes). **For real alerts, deploy the Cloud Functions below.**
+                            Receive FloodX alerts directly to your mobile or Telegram app (simulated feature for demonstration purposes). **For real alerts, deploy the Cloud Functions below.**
                         </p>
 
                         <form onsubmit="subscribeAlerts(event)">
                             <label for="phone-input" class="block text-sm font-medium text-gray-700 mb-1">
                                 Mobile Number (for SMS)
                             </label>
-                            <input type="tel" id="phone-input" required pattern="[0-9]{10,15}" placeholder="e.g., 9876543210" 
+                            <input type="tel" id="phone-input" pattern="[0-9]{10,15}" placeholder="e.g., 9876543210" 
                                 class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 mb-4">
 
                             <label for="telegram-input" class="block text-sm font-medium text-gray-700 mb-1">
                                 Telegram Handle (for Telegram Bot)
                             </label>
-                            <input type="text" id="telegram-input" placeholder="e.g., @assam_citizen" 
+                            <input type="text" id="telegram-input" placeholder="e.g., @tn_citizen" 
                                 class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 mb-6">
                             
                             <button type="submit" id="subscribe-button" class="w-full px-4 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-150 transform hover:scale-[1.01]">
-                                Subscribe to FLEWS Alerts
+                                Subscribe to FloodX Alerts
                             </button>
                             <p id="subscribe-message" class="mt-4 text-center font-medium hidden"></p>
                         </form>
@@ -217,7 +217,7 @@
                 <h2 class="section-title text-3xl font-bold text-gray-800 mb-8">✨ Stakeholder Role Clarifier (Gemini LLM)</h2>
                 <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-purple-500">
                     <p class="text-gray-600 mb-4">
-                        Ask the Gemini LLM a question about the roles and responsibilities of any FLEWS stakeholder (ASDMA, NESAC, IMD, CWC/AWRD) or a component (WRF, HEC-HMS) using information from the official report.
+                        Ask the Gemini LLM a question about the roles and responsibilities of any FloodX stakeholder (ASDMA, NESAC, IMD, CWC/AWRD) or a component (WRF, HEC-HMS) using information from the official report.
                     </p>
 
                     <form onsubmit="handleQAGeneration(event)">
@@ -241,18 +241,18 @@
                 </div>
             </section>
             
-            <!-- 3. About FLEWS -->
+            <!-- 3. About FloodX -->
             <section id="about" class="py-12">
-                <h2 class="section-title text-3xl font-bold text-gray-800 mb-8">What is FLEWS?</h2>
+                <h2 class="section-title text-3xl font-bold text-gray-800 mb-8">What is FloodX?</h2>
                 <div class="bg-white p-6 md:p-8 rounded-xl shadow-md">
                     <h3 class="text-2xl font-semibold text-cyan-700 mb-4">The Problem Statement</h3>
                     <p class="text-gray-600 mb-6">
                         Flood is an annual event in Assam, with over 40% of its land susceptible to damage. While the Central Water Commission (CWC) provided forecasts for major rivers, it did not indicate the specific **areas or villages** where flooding would occur. This left the administrative machinery "clueless" as to which revenue circle should be warned or evacuated.
                     </p>
 
-                    <h3 class="text-2xl font-semibold text-cyan-700 mb-4">The FLEWS Solution</h3>
+                    <h3 class="text-2xl font-semibold text-cyan-700 mb-4">The FloodX Solution</h3>
                     <p class="text-gray-600 mb-6">
-                        FLEWS was developed by the **North Eastern Space Application Centre (NESAC)** in collaboration with **ASDMA** to provide a **location-specific** early warning advisory. It integrates hydro-meteorological data, satellite imagery, and hydrological modeling to issue actionable alerts.
+                        FloodX was developed by the **North Eastern Space Application Centre (NESAC)** in collaboration with **ASDMA** to provide a **location-specific** early warning advisory. It integrates hydro-meteorological data, satellite imagery, and hydrological modeling to issue actionable alerts.
                     </p>
 
                     <div class="grid md:grid-cols-3 gap-6 mt-8">
@@ -308,7 +308,7 @@
             <section id="alerts" class="py-12">
                 <h2 class="section-title text-3xl font-bold text-gray-800 mb-8">Alert Dissemination: User Groups</h2>
                 <div class="bg-white p-6 md:p-8 rounded-xl shadow-md">
-                    <p class="text-gray-600 mb-6">FLEWS alerts are disseminated to three main user groups via SMS (brief) and Email (detailed with maps) for coordinated response **within Assam**.</p>
+                    <p class="text-gray-600 mb-6">FloodX alerts are disseminated to three main user groups via SMS (brief) and Email (detailed with maps) for coordinated response **within Assam**.</p>
 
                     <!-- Tab Buttons -->
                     <div class="flex justify-center border-b border-gray-200 mb-6">
@@ -509,7 +509,7 @@
             <section id="success" class="py-12">
                 <h2 class="section-title text-3xl font-bold text-gray-800 mb-8">Impact: Comparative Flood Analysis (1988–2022)</h2>
                 <div class="bg-white p-6 md:p-8 rounded-xl shadow-md overflow-x-auto">
-                    <p class="text-gray-600 mb-4 text-sm">Historical comparison showing the effects of preparedness measures, including FLEWS (operational post-2009). Data up to 2012 is from the project document; later data is from public sources (Wikipedia/ReliefWeb).</p>
+                    <p class="text-gray-600 mb-4 text-sm">Historical comparison showing the effects of preparedness measures, including FloodX (operational post-2009). Data up to 2012 is from the project document; later data is from public sources (Wikipedia/ReliefWeb).</p>
                     <table class="min-w-full divide-y divide-cyan-200">
                         <thead>
                             <tr class="bg-cyan-50">
@@ -520,7 +520,7 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100">
-                            <!-- Pre-FLEWS Era (High Impact) -->
+                            <!-- Pre-FloodX Era (High Impact) -->
                             <tr class="bg-red-50">
                                 <td class="px-3 py-3 whitespace-nowrap text-red-700 font-medium">1988</td>
                                 <td class="px-3 py-3 whitespace-nowrap">8.41</td>
@@ -533,7 +533,7 @@
                                 <td class="px-3 py-3 whitespace-nowrap">23.64</td>
                                 <td class="px-3 py-3 whitespace-nowrap">497</td>
                             </tr>
-                            <!-- Early FLEWS Era (Post-2009) -->
+                            <!-- Early FloodX Era (Post-2009) -->
                             <tr class="bg-green-50 font-medium">
                                 <td class="px-3 py-3 whitespace-nowrap text-green-700">2010</td>
                                 <td class="px-3 py-3 whitespace-nowrap">2.55</td>
@@ -571,13 +571,13 @@
                     <div class="mt-8 p-4 bg-cyan-100 rounded-lg border-l-4 border-cyan-600">
                         <p class="font-semibold text-cyan-800">Wikipedia Analysis: Post-2012 Flood Trends</p>
                         <p class="text-sm text-gray-700 mt-2">
-                            The Wikipedia data confirms that major catastrophic floods remain a frequent occurrence in Assam (e.g., 2020 and 2022 saw the affected population soar to **5.5 million**). While FLEWS successfully reduced losses in its pilot phase (2010, 2011), the continuing severity of recent floods highlights the need for constant modernization and expansion of the warning system, as recommended in the original project document. The floods are a complex, recurrent issue intensified by the massive discharge from the Brahmaputra River.
+                            The Wikipedia data confirms that major catastrophic floods remain a frequent occurrence in Assam (e.g., 2020 and 2022 saw the affected population soar to **5.5 million**). While FloodX successfully reduced losses in its pilot phase (2010, 2011), the continuing severity of recent floods highlights the need for constant modernization and expansion of the warning system, as recommended in the original project document. The floods are a complex, recurrent issue intensified by the massive discharge from the Brahmaputra River.
                         </p>
                     </div>
 
                     <div class="mt-8 p-4 bg-gray-100 rounded-lg border-l-4 border-gray-600">
                         <p class="font-semibold text-gray-800">Conclusion from the Project Document:</p>
-                        <p class="text-sm text-gray-700">The district administration for those districts under FLEWS has welcomed the early warning and participated in it with great commitment. Sustainability of the project is ensured as it has proved to be an effective tool for decision making.</p>
+                        <p class="text-sm text-gray-700">The district administration for those districts under FloodX has welcomed the early warning and participated in it with great commitment. Sustainability of the project is ensured as it has proved to be an effective tool for decision making.</p>
                     </div>
                 </div>
             </section>
@@ -588,7 +588,7 @@
         <footer class="bg-gray-900 text-white mt-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:flex md:justify-between md:items-center">
                 <div class="text-center md:text-left mb-4 md:mb-0">
-                    <p class="text-sm">&copy; 2024 Flood Early Warning System (FLEWS) Information Hub</p>
+                    <p class="text-sm">&copy; 2024 Flood Early Warning System (FloodX) Information Hub</p>
                     <p class="text-xs text-gray-400">Based on documentation supported by Dept. of Administrative Reforms & Public Grievances, Govt. of India. Recent flood data from public sources (Wikipedia).</p>
                 </div>
                 <div class="flex justify-center space-x-6">

@@ -7,12 +7,12 @@
         *********************************************************************************
         */
         // PLACEHOLDER URLS - REPLACE THESE AFTER DEPLOYMENT
-        const TELEGRAM_URL = "https://us-central1-YOUR_PROJECT.cloudfunctions.net/sendTelegramAlert"; 
-        const TWILIO_URL = "https://us-central1-YOUR_PROJECT.cloudfunctions.net/sendSMSAlert";   
+        const TELEGRAM_URL = "http://127.0.0.1:4000/floodx-d3a60/us-central1/sendTelegramAlert"; // Local emulator URL for testing
+        const TWILIO_URL ="http://127.0.0.1:4000/floodx-d3a60/us-central1/sendSMSAlert"; // Local emulator URL for testing
 
         
         // --- GEMINI API Configuration ---
-        const apiKey = ""; 
+        const apiKey = "AIzaSyDaBxadGe6423DtSVcnADPcZM6DlZI6PkM"; // Replace with your actual Gemini API key
         const apiUrlBase = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent";
         const MAX_RETRIES = 3;
 

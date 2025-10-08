@@ -12,6 +12,11 @@ import twilio from "twilio";
 // -----------------------------
 export const sendTelegramAlert = functions.https.onRequest(async (req, res) => {
   try {
+    // Load environment variables from .env file if not already loaded
+    if (!process.env.TELEGRAM_BOT_TOKEN || !process.env.TELEGRAM_CHAT_ID) {
+      require("dotenv").config();
+    }
+
     const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
     const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
