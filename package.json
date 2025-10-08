@@ -1,0 +1,15 @@
+{
+  "name": "flews-functions",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "serve": "firebase emulators:start",
+    "deploy": "firebase deploy --only functions"
+  },
+  "dependencies": {
+    "firebase-functions": "^4.8.0",
+    "twilio": "^4.23.0",
+    "node-fetch": "^3.3.2"
+  }
+}
