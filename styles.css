@@ -1,0 +1,105 @@
+ @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+        :root {
+            /* Light Mode Variables */
+            --bg-primary: #f7f9fb;
+            --bg-secondary: #ffffff;
+            --text-primary: #1f2937; /* gray-800 */
+            --content-overlay: rgba(247, 249, 251, 0.9);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark {
+            /* Dark Mode Variables */
+            --bg-primary: #111827; /* gray-900 */
+            --bg-secondary: #1f2937; /* gray-800 */
+            --text-primary: #e5e7eb; /* gray-200 */
+            --content-overlay: rgba(31, 41, 55, 0.95); /* dark overlay */
+            --shadow-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            /* 1. BACKGROUND IMAGE STYLING: Updated to use the new iStock URL */
+            background-image: url('https://media.istockphoto.com/id/1090453170/photo/flooded-of-muddy-water-overflow.jpg?s=612x612&w=0&k=20&c=Mm1smZlQdvGv69hq8U8dlvjcPDQpwL839xpqPr9dbJw='); 
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Style for content wrapper to ensure readability */
+        #content-wrapper {
+            /* Applying a translucent overlay for readability, updates with dark mode */
+            background-color: var(--content-overlay); 
+            min-height: 100vh;
+        }
+        
+        /* Apply primary colors to background elements */
+        .bg-white, .bg-gray-50, .bg-gray-100 {
+            background-color: var(--bg-secondary) !important;
+            color: var(--text-primary) !important;
+        }
+
+        .text-gray-800, .text-gray-600, .text-gray-700 {
+             color: var(--text-primary) !important;
+        }
+        
+        .shadow-lg, .shadow-md, .shadow-sm {
+            box-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -2px var(--shadow-color);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #06b6d4; /* Tailwind cyan-500 (kept bright for contrast) */
+            margin-top: 8px;
+            border-radius: 9999px;
+        }
+        /* Custom styles for tab active state */
+        .tab-button.active {
+            border-bottom: 3px solid #06b6d4; /* cyan-600 */
+            color: #0e7490; /* cyan-700 */
+            font-weight: 600;
+            background-color: #ecfeff; /* cyan-50 */
+        }
+
+        /* --- NEW FLOATING ALERT BOT STYLES --- */
+        #floatingAlertBot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 2px solid #0077ff;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            font-family: 'Inter', sans-serif;
+            display: none;
+            z-index: 1000;
+            max-width: 300px;
+            transition: transform 0.3s ease-out;
+        }
+        #floatingAlertBot strong {
+            color: #b71c1c; /* Deep Red for Alert Symbol */
+            font-size: 1.1em;
+        }
+        #floatingAlertBot button {
+            margin-top: 10px;
+            background: #0077ff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        #floatingAlertBot button:hover {
+            background: #005bb5;
+        }

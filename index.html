@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLEWS - Flood Early Warning System, Assam</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind for Inter font -->
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body class="text-gray-800">
+
+    <!-- Stakeholder Modal (Hidden by default) -->
+    <div id="stakeholder-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden z-[99] items-center justify-center p-4 transition-opacity duration-300">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg overflow-hidden transform transition-all sm:max-w-xl">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="modal-title" class="text-2xl font-bold text-cyan-700"></h3>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+                <p id="modal-description" class="text-gray-600 mb-4"></p>
+                <div id="modal-details" class="space-y-2 text-sm text-gray-700"></div>
+            </div>
+            <div class="bg-gray-50 px-6 py-4 flex justify-end">
+                <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition duration-150">Close</button>
+            </div>
+        </div>
+    </div>
+    <!-- End Stakeholder Modal -->
+
+    <!-- Main Content Wrapper with Translucent Background -->
+    <div id="content-wrapper">
+
+        <!-- Navigation Bar -->
+        <nav class="sticky top-0 z-50 bg-white shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <a href="#home" class="flex items-center space-x-2">
+                        <svg class="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 100-16 8 8 0 000 16zM11 15h2v2h-2zm0-8h2v6h-2z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20a8 8 0 01-6.93-3.99A4.996 4.996 0 0112 10a4.996 4.996 0 016.93 6.01A8 8 0 0112 20z"></path></svg>
+                        <span class="text-xl font-bold text-gray-900">FLEWS</span>
+                    </a>
+                    <div class="flex items-center space-x-6">
+                         <!-- Dark Mode Toggle Button -->
+                        <button id="theme-toggle" onclick="toggleDarkMode()" class="text-xl text-gray-500 hover:text-cyan-600 transition duration-150">
+                            <!-- Icon updates in JS -->
+                            <span id="theme-icon">☀️</span>
+                        </button>
+                        
+                        <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                            <a href="#home" class="text-gray-500 hover:text-cyan-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150">Home</a>
+                            <a href="#about" class="text-gray-500 hover:text-cyan-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150">About FLEWS</a>
+                            <a href="#monitoring" class="text-gray-500 hover:text-cyan-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150">Monitoring</a>
+                            <a href="#llm-qa" class="text-gray-500 hover:text-cyan-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150">LLM Q&A</a>
+                            <a href="#components" class="text-gray-500 hover:text-cyan-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150">Components</a>
+                            <a href="#alerts" class="text-gray-500 hover:text-cyan-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150">Alerts</a>
+                            <a href="#hazard" class="text-gray-500 hover:text-cyan-600 px-3 py-2 rounded-md text-sm font-medium transition duration-150">Hazard Index</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+            <!-- 1. Hero Section -->
+            <section id="home" class="text-center py-16 bg-white rounded-xl shadow-lg mb-12">
+                <h1 class="text-5xl font-extrabold text-cyan-700 leading-tight">
+                    Flood Early Warning System
+                </h1>
+                <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+                    A Warning Mechanism for Mitigating Disasters During Flood in Assam
+                </p>
+                <div class="mt-8 flex justify-center space-x-4">
+                    <a href="#about" class="px-6 py-3 bg-cyan-600 text-white font-semibold text-lg rounded-full shadow-lg hover:bg-cyan-700 transition duration-300 transform hover:scale-105">
+                        Learn More
+                    </a>
+                    <a href="#monitoring" class="px-6 py-3 bg-white text-cyan-600 border border-cyan-600 font-semibold text-lg rounded-full shadow-lg hover:bg-cyan-50 transition duration-300 transform hover:scale-105">
+                        View Monitoring Hub
+                    </a>
+                </div>
+            </section>
+
+            <!-- 2. Key Elements of EWS (Visual Representation) -->
+            <section class="py-12">
+                <h2 class="section-title text-3xl font-bold text-gray-800 mb-8">Key Elements of an Early Warning System</h2>
+                <div class="grid md:grid-cols-4 gap-6 bg-white p-6 md:p-10 rounded-xl shadow-md">
+                    <!-- Element 1: Risk Knowledge -->
+                    <div class="flex flex-col items-center p-4 rounded-lg bg-red-50/50">
+                        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-3">
+                            <span class="text-3xl" role="img" aria-label="Hazard">⚠️</span>
+                        </div>
+                        <h3 class="font-semibold text-lg text-red-700">Risk Knowledge</h3>
+                        <p class="text-sm text-center text-gray-500">Hazard, Elements at Risk, Vulnerability Assessment.</p>
+                    </div>
+
+                    <!-- Arrow Icon (Desktop Only) -->
+                    <div class="hidden md:flex items-center justify-center text-cyan-500">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </div>
+
+                    <!-- Element 2: Monitoring and Warning -->
+                    <div class="flex flex-col items-center p-4 rounded-lg bg-blue-50/50 md:col-span-1 col-span-4">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-3">
+                            <span class="text-3xl" role="img" aria-label="Monitoring">📊</span>
+                        </div>
+                        <h3 class="font-semibold text-lg text-blue-700">Monitoring and Warning Services</h3>
+                        <p class="text-sm text-center text-gray-500">Rainfall, River Level, Warning Decision (24/7 Operation).</p>
+                    </div>
+                    
+                    <!-- Arrow Icon (Desktop Only) -->
+                    <div class="hidden md:flex items-center justify-center text-cyan-500">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </div>
+
+                    <!-- Element 3: Dissemination and Communication -->
+                    <div class="flex flex-col items-center p-4 rounded-lg bg-green-50/50">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-3">
+                            <span class="text-3xl" role="img" aria-label="Communication">📡</span>
+                        </div>
+                        <h3 class="font-semibold text-lg text-green-700">Dissemination and Communication</h3>
+                        <p class="text-sm text-center text-gray-500">Radio, SMS, Email, Household Warning (Clear, Simple Messages).</p>
+                    </div>
+                    
+                    <!-- Arrow Icon (Desktop Only) -->
+                    <div class="hidden md:flex items-center justify-center text-cyan-500">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </div>
+
+                    <!-- Element 4: Response Capability -->
+                    <div class="flex flex-col items-center p-4 rounded-lg bg-yellow-50/50 md:col-span-1 col-span-4">
+                        <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-3">
+                            <span class="text-3xl" role="img" aria-label="Response">🏠</span>
+                        </div>
+                        <h3 class="font-semibold text-lg text-yellow-700">Response Capability</h3>
+                        <p class="text-sm text-center text-gray-500">Evacuation Centre, Search & Rescue, Relief Goods, Preparedness.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- NEW SECTION: Real-Time Monitoring & Alert Hub (Interactive) -->
+            <section id="monitoring" class="py-12">
+                <h2 class="section-title text-3xl font-bold text-gray-800 mb-8">Real-Time Monitoring & Alert Hub (Simulated)</h2>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    
+                    <!-- 3a. River Gauge Status Simulation -->
+                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-500">
+                        <h3 class="text-xl font-semibold text-blue-700 mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21v-8m0 0V3m0 8h2m-2 0h-2"></path></svg>
+                            River Gauge Status (Dikrong River, Lakhimpur)
+                        </h3>
+                        
+                        <p class="text-sm text-gray-600 mb-4">
+                            Simulate the current water level for the Dikrong River (Danger Level: $86.60\text{m}$). The status below updates dynamically.
+                        </p>
+                        
+                        <label for="water-level-input" class="block text-sm font-medium text-gray-700 mb-1">
+                            Current Water Level (in meters):
+                        </label>
+                        <input type="number" id="water-level-input" min="80" max="95" step="0.01" value="84.00" oninput="updateGaugeStatus()" 
+                               class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-lg mb-4">
+                        
+                        <div id="gauge-status-box" class="p-4 rounded-lg text-center font-bold transition-colors duration-300">
+                            <!-- Status will be updated by JavaScript -->
+                            <p id="gauge-location" class="text-sm">Dikrong River (DL: $86.60\text{m}$)</p>
+                            <p id="gauge-status" class="text-2xl mt-1">SAFE</p>
+                        </div>
+
+                        <!-- NEW GEMINI FEATURE 1: Safety Guidance Generator -->
+                        <div id="llm-guidance-container" class="mt-6 p-4 bg-cyan-50 border-l-4 border-cyan-500 rounded-lg hidden">
+                            <p class="font-semibold text-cyan-800 mb-2 flex items-center">
+                                <span class="text-xl mr-2">✨</span> LLM Safety Guidance
+                                <span id="guidance-loader" class="ml-3 text-xs text-gray-500 hidden">Generating...</span>
+                            </p>
+                            <div id="llm-guidance-content" class="text-sm text-gray-700">
+                                <!-- Guidance text loaded by Gemini API -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3b. Alert Subscription Simulation (Telegram/SMS) -->
+                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-green-500">
+                        <h3 class="text-xl font-semibold text-green-700 mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.664a2 2 0 01-1.789-2.894l3.5-7A2 2 0 0114 10zM5 18V9a2 2 0 012-2h10"></path></svg>
+                            Direct Alert Subscription (Simulated)
+                        </h3>
+                        <p class="text-sm text-gray-600 mb-4">
+                            Receive FLEWS alerts directly to your mobile or Telegram app (simulated feature for demonstration purposes). **For real alerts, deploy the Cloud Functions below.**
+                        </p>
+
+                        <form onsubmit="subscribeAlerts(event)">
+                            <label for="phone-input" class="block text-sm font-medium text-gray-700 mb-1">
+                                Mobile Number (for SMS)
+                            </label>
+                            <input type="tel" id="phone-input" required pattern="[0-9]{10,15}" placeholder="e.g., 9876543210" 
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 mb-4">
+
+                            <label for="telegram-input" class="block text-sm font-medium text-gray-700 mb-1">
+                                Telegram Handle (for Telegram Bot)
+                            </label>
+                            <input type="text" id="telegram-input" placeholder="e.g., @assam_citizen" 
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 mb-6">
+                            
+                            <button type="submit" id="subscribe-button" class="w-full px-4 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-150 transform hover:scale-[1.01]">
+                                Subscribe to FLEWS Alerts
+                            </button>
+                            <p id="subscribe-message" class="mt-4 text-center font-medium hidden"></p>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- NEW GEMINI FEATURE 2: Stakeholder Q&A Generator -->
+            <section id="llm-qa" class="py-12">
+                <h2 class="section-title text-3xl font-bold text-gray-800 mb-8">✨ Stakeholder Role Clarifier (Gemini LLM)</h2>
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-purple-500">
+                    <p class="text-gray-600 mb-4">
+                        Ask the Gemini LLM a question about the roles and responsibilities of any FLEWS stakeholder (ASDMA, NESAC, IMD, CWC/AWRD) or a component (WRF, HEC-HMS) using information from the official report.
+                    </p>
+
+                    <form onsubmit="handleQAGeneration(event)">
+                        <label for="qa-input" class="block text-sm font-medium text-gray-700 mb-1">
+                            Your Question:
+                        </label>
+                        <textarea id="qa-input" rows="3" required placeholder="Example: How does the HEC-HMS model specifically help the Circle Officers?" 
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500 mb-4"></textarea>
+                        
+                        <button type="submit" id="qa-button" class="w-full px-4 py-3 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition duration-150 transform hover:scale-[1.01]">
+                            Generate Expert Answer ✨
+                        </button>
+                    </form>
+
+                    <div id="qa-output-container" class="mt-6 hidden">
+                        <h4 class="text-xl font-semibold text-purple-700 mb-3">Expert Response:</h4>
+                        <div id="qa-output" class="p-4 bg-purple-50 rounded-lg text-gray-700">
+                            <!-- LLM response goes here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 3. About FLEWS -->
+            <section id="about" class="py-12">
+                <h2 class="section-title text-3xl font-bold text-gray-800 mb-8">What is FLEWS?</h2>
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-md">
+                    <h3 class="text-2xl font-semibold text-cyan-700 mb-4">The Problem Statement</h3>
+                    <p class="text-gray-600 mb-6">
+                        Flood is an annual event in Assam, with over 40% of its land susceptible to damage. While the Central Water Commission (CWC) provided forecasts for major rivers, it did not indicate the specific **areas or villages** where flooding would occur. This left the administrative machinery "clueless" as to which revenue circle should be warned or evacuated.
+                    </p>
+
+                    <h3 class="text-2xl font-semibold text-cyan-700 mb-4">The FLEWS Solution</h3>
+                    <p class="text-gray-600 mb-6">
+                        FLEWS was developed by the **North Eastern Space Application Centre (NESAC)** in collaboration with **ASDMA** to provide a **location-specific** early warning advisory. It integrates hydro-meteorological data, satellite imagery, and hydrological modeling to issue actionable alerts.
+                    </p>
+
+                    <div class="grid md:grid-cols-3 gap-6 mt-8">
+                        <div class="p-4 bg-cyan-50 border-l-4 border-cyan-500 rounded-lg shadow-inner">
+                            <p class="font-bold text-lg text-cyan-800">Alert Lead Time</p>
+                            <p class="text-gray-600">7 to 18 hours</p>
+                        </div>
+                        <div class="p-4 bg-cyan-50 border-l-4 border-cyan-500 rounded-lg shadow-inner">
+                            <p class="font-bold text-lg text-cyan-800">Location Specificity</p>
+                            <p class="text-gray-600">Revenue Circle / Group of Villages</p>
+                        </div>
+                        <div class="p-4 bg-cyan-50 border-l-4 border-cyan-500 rounded-lg shadow-inner">
+                            <p class="font-bold text-lg text-cyan-800">Success Rate (2012)</p>
+                            <p class="text-gray-600">Improved to about 65%</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Technical Components -->
+            <section id="components" class="py-12">
+                <h2 class="section-title text-3xl font-bold text-gray-800 mb-8">Major Technical Components</h2>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Meteorological Component -->
+                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-indigo-500">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <svg class="w-8 h-8 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                            <h3 class="text-xl font-semibold text-indigo-700">1. Meteorological Component</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Focuses on rainfall prediction and overall probability of rainfall in a basin using numerical models and ground/satellite data.</p>
+                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 pl-4">
+                            <li>**WRF Model:** Weather Research Forecast model for grid-based rainfall prediction ($3\text{km}$ to $27\text{km}$ resolution).</li>
+                            <li>**Synoptic Analysis:** Forecasts based on cloud properties, wind speed, vorticity, and atmospheric conditions.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Hydrological Component -->
+                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300 border-t-4 border-teal-500">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <svg class="w-8 h-8 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21.75l-7.5-3.375L3 18V5.25l9-4.5 9 4.5V18l-1.5-.675L12 21.75zM12 12V3.75"></path></svg>
+                            <h3 class="text-xl font-semibold text-teal-700">2. Hydrological Component</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">Hybrid modeling approach to forecast water discharge and daily river flow hydrographs.</p>
+                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 pl-4">
+                            <li>**Rational Model (Lumped):** Provides the forecast of the peak discharge value for a river basin.</li>
+                            <li>**HEC-HMS Model (Quasi Distributed):** Provides the forecast for the daily hydrograph using SCS-CN method for runoff and Muskingum routing for flow.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 5. Dissemination & Alerts (Interactive Tabs) -->
+            <section id="alerts" class="py-12">
+                <h2 class="section-title text-3xl font-bold text-gray-800 mb-8">Alert Dissemination: User Groups</h2>
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-md">
+                    <p class="text-gray-600 mb-6">FLEWS alerts are disseminated to three main user groups via SMS (brief) and Email (detailed with maps) for coordinated response **within Assam**.</p>
+
+                    <!-- Tab Buttons -->
+                    <div class="flex justify-center border-b border-gray-200 mb-6">
+                        <button id="group1-tab" onclick="switchTab('group1')" class="tab-button active flex-1 py-3 px-4 text-center text-gray-600 hover:text-cyan-700 transition duration-150 rounded-t-lg">
+                            Group 1: Upper Assam
+                        </button>
+                        <button id="group2-tab" onclick="switchTab('group2')" class="tab-button flex-1 py-3 px-4 text-center text-gray-600 hover:text-cyan-700 transition duration-150 rounded-t-lg">
+                            Group 2: Middle / Barak Valley
+                        </button>
+                        <button id="group3-tab" onclick="switchTab('group3')" class="tab-button flex-1 py-3 px-4 text-center text-gray-600 hover:text-cyan-700 transition duration-150 rounded-t-lg">
+                            Group 3: Lower Assam
+                        </button>
+                    </div>
+
+                    <!-- Tab Content -->
+                    <div id="tab-content">
+                        <!-- Group 1 Content (UPDATED) -->
+                        <div id="group1" class="tab-pane active-tab p-4 bg-cyan-50 rounded-lg">
+                            <h4 class="text-xl font-semibold text-cyan-800 mb-3">Upper Assam Districts</h4>
+                            <p class="text-gray-700 mb-4">This group primarily covers the eastern and upper reaches of the Brahmaputra valley, focusing on the initial impact zones of upstream rainfall events.</p>
+                            <div class="space-y-2">
+                                <p class="flex items-center text-cyan-700 font-medium">
+                                    <svg class="w-5 h-5 mr-2 text-cyan-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    Dhemaji (High Vulnerability)
+                                </p>
+                                <p class="flex items-center text-cyan-700 font-medium">
+                                    <svg class="w-5 h-5 mr-2 text-cyan-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    Lakhimpur (Pilot District, High Vulnerability)
+                                </p>
+                                <p class="flex items-center text-cyan-700 font-medium">
+                                    <svg class="w-5 h-5 mr-2 text-cyan-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    Sivasagar
+                                </p>
+                            </div>
+                            
+                            <button onclick="toggleDetails('g1-chain', 'g1-icon')" 
+                                class="mt-4 px-4 py-2 text-sm bg-cyan-200 text-cyan-800 rounded-lg hover:bg-cyan-300 transition duration-150 flex items-center shadow-md hover:shadow-lg">
+                                View Local Dissemination Chain
+                                <svg id="g1-icon" class="w-4 h-4 ml-2 transform rotate-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            
+                            <div id="g1-chain" class="mt-3 p-3 bg-white rounded-lg border border-cyan-100 text-sm hidden">
+                                <p class="font-semibold text-cyan-700 mb-2">Alert Cascade Process (ASDMA Flow):</p>
+                                <ol class="list-decimal list-inside text-gray-700 ml-4 space-y-1">
+                                    <li>**NESAC** issues SMS/Email alert.</li>
+                                    <li>Alert received by **ASDMA Control Room** / **Deputy Commissioners (DC)**.</li>
+                                    <li>DC/DPO alerts **Circle Officers (COs)** and **Water Resources Dept.** via SMS/Phone.</li>
+                                    <li>COs alert the **Gaon Buras / PRIs / VDM Committees** at the village level for ground action.</li>
+                                </ol>
+                            </div>
+                        </div>
+                        
+                        <!-- Group 2 Content (UPDATED) -->
+                        <div id="group2" class="tab-pane hidden p-4 bg-cyan-50 rounded-lg">
+                            <h4 class="text-xl font-semibold text-cyan-800 mb-3">Middle Assam & Barak Valley Districts</h4>
+                            <p class="text-gray-700 mb-4">Alerts for the central region and the southern Barak valley, which includes the Cachar plains region (fed by the Barak River).</p>
+                            <div class="space-y-2">
+                                <p class="flex items-center text-cyan-700 font-medium">
+                                    <svg class="w-5 h-5 mr-2 text-cyan-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    Cachar, Hailakandi, Karimganj (Barak Valley Focus)
+                                </p>
+                                <p class="flex items-center text-cyan-700 font-medium">
+                                    <svg class="w-5 h-5 mr-2 text-cyan-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    Darrang, Sonitpur, Morigaon (Central Brahmaputra)
+                                </p>
+                                <p class="text-xs text-gray-500 mt-2 ml-7">Morigaon and Darrang are identified among the top 5 most flood-prone districts by the FHI.</p>
+                            </div>
+
+                            <button onclick="toggleDetails('g2-chain', 'g2-icon')" 
+                                class="mt-4 px-4 py-2 text-sm bg-cyan-200 text-cyan-800 rounded-lg hover:bg-cyan-300 transition duration-150 flex items-center shadow-md hover:shadow-lg">
+                                View Local Dissemination Chain
+                                <svg id="g2-icon" class="w-4 h-4 ml-2 transform rotate-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            
+                            <div id="g2-chain" class="mt-3 p-3 bg-white rounded-lg border border-cyan-100 text-sm hidden">
+                                <p class="font-semibold text-cyan-700 mb-2">Alert Cascade Process (ASDMA Flow):</p>
+                                <ol class="list-decimal list-inside text-gray-700 ml-4 space-y-1">
+                                    <li>**NESAC** issues SMS/Email alert.</li>
+                                    <li>Alert received by **ASDMA Control Room** / **Deputy Commissioners (DC)**.</li>
+                                    <li>DC/DPO alerts **Circle Officers (COs)** and **Water Resources Dept.** via SMS/Phone.</li>
+                                    <li>COs alert the **Gaon Buras / PRIs / VDM Committees** at the village level for ground action.</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <!-- Group 3 Content (UPDATED) -->
+                        <div id="group3" class="tab-pane hidden p-4 bg-cyan-50 rounded-lg">
+                            <h4 class="text-xl font-semibold text-cyan-800 mb-3">Lower Assam Districts</h4>
+                            <p class="text-gray-700 mb-4">Covers the western and lower areas of the Brahmaputra valley, often impacted by downstream flow accumulation and major tributaries.</p>
+                            <div class="space-y-2">
+                                <p class="flex items-center text-cyan-700 font-medium">
+                                    <svg class="w-5 h-5 mr-2 text-cyan-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    Nalbari (Highest Hazard Index - 27)
+                                </p>
+                                <p class="flex items-center text-cyan-700 font-medium">
+                                    <svg class="w-5 h-5 mr-2 text-cyan-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    Barpeta, Baska, Goalpara, Dhubri
+                                </p>
+                                <p class="text-xs text-gray-500 mt-2 ml-7">These districts are crucial for managing the downstream discharge from the Brahmaputra and its tributaries like the Beki and Manas rivers.</p>
+                            </div>
+
+                            <button onclick="toggleDetails('g3-chain', 'g3-icon')" 
+                                class="mt-4 px-4 py-2 text-sm bg-cyan-200 text-cyan-800 rounded-lg hover:bg-cyan-300 transition duration-150 flex items-center shadow-md hover:shadow-lg">
+                                View Local Dissemination Chain
+                                <svg id="g3-icon" class="w-4 h-4 ml-2 transform rotate-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            
+                            <div id="g3-chain" class="mt-3 p-3 bg-white rounded-lg border border-cyan-100 text-sm hidden">
+                                <p class="font-semibold text-cyan-700 mb-2">Alert Cascade Process (ASDMA Flow):</p>
+                                <ol class="list-decimal list-inside text-gray-700 ml-4 space-y-1">
+                                    <li>**NESAC** issues SMS/Email alert.</li>
+                                    <li>Alert received by **ASDMA Control Room** / **Deputy Commissioners (DC)**.</li>
+                                    <li>DC/DPO alerts **Circle Officers (COs)** and **Water Resources Dept.** via SMS/Phone.</li>
+                                    <li>COs alert the **Gaon Buras / PRIs / VDM Committees** at the village level for ground action.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- 6. Flood Hazard Index & Stakeholders (Two-Column Layout) -->
+            <div class="grid lg:grid-cols-2 gap-8 py-12">
+
+                <!-- 6a. Flood Hazard Index (Unchanged) -->
+                <section id="hazard">
+                    <h2 class="section-title text-3xl font-bold text-gray-800 mb-8">Top 5 Flood Hazard Districts</h2>
+                    <div class="bg-white p-6 rounded-xl shadow-md overflow-x-auto">
+                        <p class="text-gray-600 mb-4 text-sm">Based on Flood Hazard Index (FHI) reflecting inundation frequency and hazard area percentage (Source: Flood Hazard Atlas for Assam State: NRSC).</p>
+                        <table class="min-w-full divide-y divide-cyan-200">
+                            <thead>
+                                <tr class="bg-cyan-50">
+                                    <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider rounded-tl-lg">District</th>
+                                    <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hazard Index</th>
+                                    <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider rounded-tr-lg">Human Lives Lost</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr class="hover:bg-red-50 font-bold text-red-700">
+                                <td class="px-3 py-3 whitespace-nowrap">NALBARI</td>
+                                <td class="px-3 py-3 whitespace-nowrap">27</td>
+                                <td class="px-3 py-3 whitespace-nowrap">46.78%</td>
+                            </tr>
+                            <tr class="hover:bg-red-50">
+                                <td class="px-3 py-3 whitespace-nowrap">MARIGAON</td>
+                                <td class="px-3 py-3 whitespace-nowrap">25</td>
+                                <td class="px-3 py-3 whitespace-nowrap">72.23%</td>
+                            </tr>
+                            <tr class="hover:bg-red-50">
+                                <td class="px-3 py-3 whitespace-nowrap">DARRANG</td>
+                                <td class="px-3 py-3 whitespace-nowrap">21</td>
+                                <td class="px-3 py-3 whitespace-nowrap">74.74%</td>
+                            </tr>
+                            <tr class="hover:bg-red-50">
+                                <td class="px-3 py-3 whitespace-nowrap">LAKHIMPUR</td>
+                                <td class="px-3 py-3 whitespace-nowrap">19</td>
+                                <td class="px-3 py-3 whitespace-nowrap">53.00%</td>
+                            </tr>
+                            <tr class="hover:bg-red-50">
+                                <td class="px-3 py-3 whitespace-nowrap">DHEMAJI</td>
+                                <td class="px-3 py-3 whitespace-nowrap">19</td>
+                                <td class="px-3 py-3 whitespace-nowrap">46.50%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+                <!-- 6b. Stakeholders (Interactive Cards) -->
+                <section id="stakeholders">
+                    <h2 class="section-title text-3xl font-bold text-gray-800 mb-8">Key Stakeholders & Roles (Click to View)</h2>
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <div class="space-y-4">
+                            <!-- Stakeholder Cards - Added onclick events -->
+                            <div onclick="showModal('ASDMA')" data-stakeholder="ASDMA" class="p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500 cursor-pointer hover:bg-blue-100 transition duration-150 shadow-sm">
+                                <p class="font-bold text-blue-800">ASDMA (Assam State Disaster Management Authority)</p>
+                                <p class="text-sm text-gray-600">Lead Role (Initiation, Coordination, Dissemination, Validation).</p>
+                            </div>
+                            <div onclick="showModal('NESAC')" data-stakeholder="NESAC" class="p-3 bg-purple-50 rounded-lg border-l-4 border-purple-500 cursor-pointer hover:bg-purple-100 transition duration-150 shadow-sm">
+                                <p class="font-bold text-purple-800">NESAC (North Eastern Space Application Centre)</p>
+                                <p class="text-sm text-gray-600">Model Development, Data Analysis, **Issue of Flood Warning Alerts**.</p>
+                            </div>
+                            <div onclick="showModal('IMD')" data-stakeholder="IMD" class="p-3 bg-yellow-50 rounded-lg border-l-4 border-yellow-500 cursor-pointer hover:bg-yellow-100 transition duration-150 shadow-sm">
+                                <p class="font-bold text-yellow-800">IMD (Indian Meteorological Department)</p>
+                                <p class="text-sm text-gray-600">Daily Weather Forecasts, Real-time Satellite Imagery/Products.</p>
+                            </div>
+                            <div onclick="showModal('CWC/AWRD')" data-stakeholder="CWC/AWRD" class="p-3 bg-green-50 rounded-lg border-l-4 border-green-500 cursor-pointer hover:bg-green-100 transition duration-150 shadow-sm">
+                                <p class="font-bold text-green-800">CWC & AWRD</p>
+                                <p class="text-sm text-gray-600">Water Level Monitoring for major/tributary rivers.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 7. Success and Impact (Updated Table and Analysis) -->
+            <section id="success" class="py-12">
+                <h2 class="section-title text-3xl font-bold text-gray-800 mb-8">Impact: Comparative Flood Analysis (1988–2022)</h2>
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-md overflow-x-auto">
+                    <p class="text-gray-600 mb-4 text-sm">Historical comparison showing the effects of preparedness measures, including FLEWS (operational post-2009). Data up to 2012 is from the project document; later data is from public sources (Wikipedia/ReliefWeb).</p>
+                    <table class="min-w-full divide-y divide-cyan-200">
+                        <thead>
+                            <tr class="bg-cyan-50">
+                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider rounded-tl-lg">Year</th>
+                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Affected Population (Millions)</th>
+                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Area Affected (Lakh Ha)</th>
+                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider rounded-tr-lg">Human Lives Lost</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <!-- Pre-FLEWS Era (High Impact) -->
+                            <tr class="bg-red-50">
+                                <td class="px-3 py-3 whitespace-nowrap text-red-700 font-medium">1988</td>
+                                <td class="px-3 py-3 whitespace-nowrap">8.41</td>
+                                <td class="px-3 py-3 whitespace-nowrap">38.2</td>
+                                <td class="px-3 py-3 whitespace-nowrap">232</td>
+                            </tr>
+                            <tr class="bg-red-50">
+                                <td class="px-3 py-3 whitespace-nowrap text-red-700 font-medium">2004</td>
+                                <td class="px-3 py-3 whitespace-nowrap">12.64</td>
+                                <td class="px-3 py-3 whitespace-nowrap">23.64</td>
+                                <td class="px-3 py-3 whitespace-nowrap">497</td>
+                            </tr>
+                            <!-- Early FLEWS Era (Post-2009) -->
+                            <tr class="bg-green-50 font-medium">
+                                <td class="px-3 py-3 whitespace-nowrap text-green-700">2010</td>
+                                <td class="px-3 py-3 whitespace-nowrap">2.55</td>
+                                <td class="px-3 py-3 whitespace-nowrap">N/A</td>
+                                <td class="px-3 py-3 whitespace-nowrap">12</td>
+                            </tr>
+                            <tr class="bg-green-50 font-medium">
+                                <td class="px-3 py-3 whitespace-nowrap text-green-700">2012*</td>
+                                <td class="px-3 py-3 whitespace-nowrap">3.68</td>
+                                <td class="px-3 py-3 whitespace-nowrap">15.10</td>
+                                <td class="px-3 py-3 whitespace-nowrap">149</td>
+                            </tr>
+                            <!-- Recent Years (Wikipedia Data) -->
+                            <tr>
+                                <td class="px-3 py-3 whitespace-nowrap text-gray-700">2016</td>
+                                <td class="px-3 py-3 whitespace-nowrap">1.8</td>
+                                <td class="px-3 py-3 whitespace-nowrap">N/A</td>
+                                <td class="px-3 py-3 whitespace-nowrap">~100</td>
+                            </tr>
+                            <tr class="bg-yellow-50">
+                                <td class="px-3 py-3 whitespace-nowrap text-yellow-800 font-medium">2020</td>
+                                <td class="px-3 py-3 whitespace-nowrap">5.5</td>
+                                <td class="px-3 py-3 whitespace-nowrap">N/A</td>
+                                <td class="px-3 py-3 whitespace-nowrap">133</td>
+                            </tr>
+                            <tr class="bg-yellow-50">
+                                <td class="px-3 py-3 whitespace-nowrap text-yellow-800 font-medium">2022</td>
+                                <td class="px-3 py-3 whitespace-nowrap">5.5</td>
+                                <td class="px-3 py-3 whitespace-nowrap">N/A</td>
+                                <td class="px-3 py-3 whitespace-nowrap">190</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="mt-8 p-4 bg-cyan-100 rounded-lg border-l-4 border-cyan-600">
+                        <p class="font-semibold text-cyan-800">Wikipedia Analysis: Post-2012 Flood Trends</p>
+                        <p class="text-sm text-gray-700 mt-2">
+                            The Wikipedia data confirms that major catastrophic floods remain a frequent occurrence in Assam (e.g., 2020 and 2022 saw the affected population soar to **5.5 million**). While FLEWS successfully reduced losses in its pilot phase (2010, 2011), the continuing severity of recent floods highlights the need for constant modernization and expansion of the warning system, as recommended in the original project document. The floods are a complex, recurrent issue intensified by the massive discharge from the Brahmaputra River.
+                        </p>
+                    </div>
+
+                    <div class="mt-8 p-4 bg-gray-100 rounded-lg border-l-4 border-gray-600">
+                        <p class="font-semibold text-gray-800">Conclusion from the Project Document:</p>
+                        <p class="text-sm text-gray-700">The district administration for those districts under FLEWS has welcomed the early warning and participated in it with great commitment. Sustainability of the project is ensured as it has proved to be an effective tool for decision making.</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white mt-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:flex md:justify-between md:items-center">
+                <div class="text-center md:text-left mb-4 md:mb-0">
+                    <p class="text-sm">&copy; 2024 Flood Early Warning System (FLEWS) Information Hub</p>
+                    <p class="text-xs text-gray-400">Based on documentation supported by Dept. of Administrative Reforms & Public Grievances, Govt. of India. Recent flood data from public sources (Wikipedia).</p>
+                </div>
+                <div class="flex justify-center space-x-6">
+                    <a href="#home" class="text-gray-400 hover:text-white text-sm">Home</a>
+                    <a href="#about" class="text-gray-400 hover:text-white text-sm">About</a>
+                    <a href="https://nesac.gov.in/" target="_blank" class="text-gray-400 hover:text-white text-sm">NESAC</a>
+                    <a href="https://asdma.gov.in/" target="_blank" class="text-gray-400 hover:text-white text-sm">ASDMA</a>
+                    <a href="https://tnsdma.tn.gov.in/pages/view/useful-links" target="_blank" class="text-gray-400 hover:text-white text-sm">TNSDMA</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- End Content Wrapper -->
+
+    <!-- NEW FLOATING ALERT BOT HTML -->
+    <div id="floatingAlertBot">
+        <strong>⚠ High Priority Flood Alert</strong>
+        <p id="alertMessage" class="mt-1 text-sm"></p>
+        <button onclick="closeFloatingAlert()">Dismiss</button>
+    </div>
+    <!-- END NEW FLOATING ALERT BOT HTML -->
+    <script src="script.js"></script>
+</body>
+</html>
+
